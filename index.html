@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>Simple Music Player</title>
+		<title>Dulcet</title>
 		<!-- Load FontAwesome icons -->
 		<link
 			rel="stylesheet"
@@ -23,13 +23,13 @@
 
 			<!-- Define the section for displaying track buttons -->
 			<div class="buttons">
-				<div class="prev-track" onclick="prevTrack()">
+				<div class="prev-track">
 					<i class="fa fa-step-backward fa-2x"></i>
 				</div>
-				<div class="playpause-track" onclick="playpauseTrack()">
+				<div class="playpause-track">
 					<i class="fa fa-play-circle fa-5x"></i>
 				</div>
-				<div class="next-track" onclick="nextTrack()">
+				<div class="next-track">
 					<i class="fa fa-step-forward fa-2x"></i>
 				</div>
 			</div>
@@ -63,6 +63,15 @@
 			</div>
 		</div>
 
+		<div class="playlist">
+			<div class="playlist__box">
+				<div class="song">
+					<h3>Song001</h3>
+					<h3>Song002</h3>
+					<h3>Song003</h3>
+				</div>
+			</div>
+		</div>
 		<!-- Load the main script for the player -->
 		<script src="main.js"></script>
 	</body>

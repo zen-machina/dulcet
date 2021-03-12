@@ -8,7 +8,7 @@ body {
 /* Using flex with the column direction to 
    align items in a vertical direction */
 .player {
-  height: 95vh;
+  height: 25em;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -38,13 +38,13 @@ body {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  margin-top: 25px;
+  margin-top: 5em;
 }
 
 .track-art {
-  margin: 25px;
-  height: 250px;
-  width: 250px;
+  margin: 0.5em;
+  height: 10em;
+  width: 10em;
   background-image: URL("https://source.unsplash.com/Qrspubmx6kE/640x360");
   background-size: cover;
   background-position: center;
@@ -82,7 +82,7 @@ body {
 .playpause-track,
 .prev-track,
 .next-track {
-  padding: 25px;
+  padding: 1em;
   opacity: 0.8;
   /* Smoothly transition the opacity */
   -webkit-transition: opacity 0.2s;
@@ -99,7 +99,7 @@ body {
 /* Define the slider width so that it scales properly */
 .slider_container {
   width: 75%;
-  max-width: 400px;
+  max-width: 30em;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -154,12 +154,12 @@ body {
 
 .current-time,
 .total-duration {
-  padding: 10px;
+  padding: 0.5em;
 }
 
 i.fa-volume-down,
 i.fa-volume-up {
-  padding: 10px;
+  padding: 0.5em;
 }
 
 /* Change the mouse cursor to a pointer 
