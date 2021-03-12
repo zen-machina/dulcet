@@ -8,11 +8,24 @@ body {
 /* Using flex with the column direction to 
    align items in a vertical direction */
 .player {
-	height: 25em;
+	height: auto;
 	display: flex;
 	align-items: center;
 	flex-direction: column;
 	justify-content: center;
+}
+
+.playlist {
+	min-width: 50%;
+	width: auto;
+
+	#list {
+		display: inline-block;
+		background-color: red;
+		color: black;
+		width: 25em;
+		height: 15em;
+	}
 }
 
 .details {
