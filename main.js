@@ -1,8 +1,14 @@
 // TODO
 /* 
 v0.1
+--> MAIN GOALS: 
 - able to select audio file(s) in folder and load them into playlist.
 - playlist list artist name, song name, and length
+--------------------------------------------------
+--> TODO:
+- add class name for all <li> song items.
+- add play button for each <li> element.
+- add delete functionality for playlist.
 */
 
 // function selectFiles(e) {
