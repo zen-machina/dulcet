@@ -5,22 +5,54 @@ v0.1
 - playlist list artist name, song name, and length
 */
 
-// Takes selected input files and puts them in a list called files.
-// Then iterates and alerts each file name that was selected.
-//
+// function selectFiles(e) {
+// 	var files = e.target.files; // FileList object
 
-function selectFiles(e) {
-	var files = e.target.files; // FileList object
+// 	// files is a FileList of File objects. List some properties.
+// 	var output = [];
+// 	for (var i = 0, f; (f = files[i]); i++) {
+// 		output.push("<li><strong>", escape(f.name), "</strong> </li>");
+// 	}
+// 	document.getElementById("songlist").innerHTML =
+// 		"<ul>" + output.join("") + "</ul>";
 
-	// files is a FileList of File objects. List some properties.
+// 	console.log(output[i]);
+// }
+
+let fileInput = document.getElementById("fileInput");
+let playList = document.querySelector(".playlist02");
+let playListFiles = [];
+
+//event listeners
+fileInput.addEventListener("change", addFiles);
+
+function addFiles(e) {
+	playListFiles = e.target.files;
 	var output = [];
-	for (var i = 0, f; (f = files[i]); i++) {
-		output.push("<li><strong>", escape(f.name), "</strong> </li>");
+
+	for (var i = 0, f; (f = playListFiles[i]); i++) {
+		output.push("<li>", f.name, "</li>");
 	}
-	document.getElementById("list").innerHTML =
-		"<ul>" + output.join("") + "</ul>";
+	playList.innerHTML = "<ul>" + output.join("") + "</ul>";
+	console.log(playListFiles);
 }
 
-document
-	.getElementById("fileSelection")
-	.addEventListener("change", selectFiles, false);
+//displays files in output section in browser.
+// function fileOutput(e) {
+// 	var files = e.target.files; // FileList object
+
+// 	// files is a FileList of File objects. List some properties.
+// 	var output = [];
+// 	for (var i = 0, f; (f = files[i]); i++) {
+// 		output.push("<li><strong>", f.name, "</strong></li>");
+// 	}
+
+// 	document.getElementById("playlist").innerHTML =
+// 		"<ul>" + output.join("") + "</ul>";
+// 	//file test
+// 	console.log(files[0]);
+// }
+
+// document
+// 	.getElementById("fileInput")
+// 	.addEventListener("change", fileOutput, false);

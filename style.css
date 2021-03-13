@@ -1,3 +1,14 @@
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+ul li {
+  list-style: none;
+}
+
 body {
   background-color: lightgreen;
   /* Smoothly transition the background color */
@@ -24,14 +35,36 @@ body {
           justify-content: center;
 }
 
-.playlist {
+.songlib {
   min-width: 50%;
   width: auto;
 }
 
-.playlist #list {
+.songlib .songlibbox {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin: auto;
+}
+
+.songlib .songlibbox #playlist {
   display: inline-block;
-  background-color: red;
+  background-color: #c5c5c5;
+  color: black;
+  width: 25em;
+  height: 15em;
+}
+
+.songlib .songlibbox .playlist02 {
+  display: inline-block;
+  background-color: #98b0ff;
   color: black;
   width: 25em;
   height: 15em;

@@ -1,3 +1,13 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+ul li {
+	list-style: none;
+}
+
 body {
 	background-color: lightgreen;
 
@@ -15,16 +25,31 @@ body {
 	justify-content: center;
 }
 
-.playlist {
+.songlib {
 	min-width: 50%;
 	width: auto;
 
-	#list {
-		display: inline-block;
-		background-color: red;
-		color: black;
-		width: 25em;
-		height: 15em;
+	.songlibbox {
+		display: flex;
+		align-items: center;
+		flex-direction: column;
+
+		margin: auto;
+		#playlist {
+			display: inline-block;
+			background-color: rgb(197, 197, 197);
+			color: black;
+			width: 25em;
+			height: 15em;
+		}
+
+		.playlist02 {
+			display: inline-block;
+			background-color: rgb(152, 176, 255);
+			color: black;
+			width: 25em;
+			height: 15em;
+		}
 	}
 }
 
