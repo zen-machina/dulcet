@@ -35,20 +35,28 @@ body {
 		flex-direction: column;
 
 		margin: auto;
-		#playlist {
-			display: inline-block;
-			background-color: rgb(197, 197, 197);
-			color: black;
-			width: 25em;
-			height: 15em;
-		}
 
-		.playlist02 {
+		.playlistBox {
 			display: inline-block;
-			background-color: rgb(152, 176, 255);
+			background-color: rgb(219, 200, 89);
 			color: black;
-			width: 25em;
-			height: 15em;
+			width: auto;
+			height: auto;
+
+			.playlist {
+				width: auto;
+				height: auto;
+
+				& li {
+					width: auto;
+					height: auto;
+				}
+				& li audio {
+					width: 25em;
+					height: 5em;
+					color: black;
+				}
+			}
 		}
 	}
 }

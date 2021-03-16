@@ -7,6 +7,7 @@
 			rel="stylesheet"
 			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
 		/>
+		<link rel="shortcut icon" href="#" />
 
 		<!-- Load the custom CSS style file -->
 		<link rel="stylesheet" type="text/css" href="style.css" />
@@ -63,15 +64,16 @@
 			</div>
 		</div>
 
-		<!-- Define the section for displaying the volume slider-->
+		<!-- Define the section for displaying the playlist section-->
 		<div class="songlib">
 			<div class="songlibbox">
 				<div class="songlibbox__browse">
 					<p>select files here.</p>
-					<input type="file" id="fileInput" name="files[]" multiple />
+					<input type="file" id="fileInput" multiple />
 				</div>
-				<output id="playlist"></output>
-				<div class="playlist02"></div>
+				<div class="playlistBox">
+					<ul class="playlist"></ul>
+				</div>
 			</div>
 		</div>
 		<!-- Load the main script for the player -->

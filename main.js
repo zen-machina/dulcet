@@ -1,64 +1,54 @@
 // TODO
 /* 
-v0.1
+v0.2
 --> MAIN GOALS: 
 - able to select audio file(s) in folder and load them into playlist.
 - playlist list artist name, song name, and length
 --------------------------------------------------
 --> TODO:
-- add class name for all <li> song items.
-- add play button for each <li> element.
-- add delete functionality for playlist.
+- Display audio file names.
+- Place audio files in a clean format.
+- Use custom play / pause bottons for each audio file.
+- Add delete functionality for playlist.
+- Set audio file limit to 10 files.
 */
 
-// function selectFiles(e) {
-// 	var files = e.target.files; // FileList object
-
-// 	// files is a FileList of File objects. List some properties.
-// 	var output = [];
-// 	for (var i = 0, f; (f = files[i]); i++) {
-// 		output.push("<li><strong>", escape(f.name), "</strong> </li>");
-// 	}
-// 	document.getElementById("songlist").innerHTML =
-// 		"<ul>" + output.join("") + "</ul>";
-
-// 	console.log(output[i]);
-// }
-
 let fileInput = document.getElementById("fileInput");
-let playList = document.querySelector(".playlist02");
+let myfiles = fileInput.files;
+let playList = document.querySelector(".playlist");
 let playListFiles = [];
 
 //event listeners
 fileInput.addEventListener("change", addFiles);
 
-function addFiles(e) {
-	playListFiles = e.target.files;
-	var output = [];
+function addFiles() {
+	// takes files from FileList (input files) and places them into playListFiles[].
+	playListFiles.push.apply(playListFiles, myfiles);
 
-	for (var i = 0, f; (f = playListFiles[i]); i++) {
-		output.push("<li>", f.name, "</li>");
+	for (var i = 0; i < myfiles.length; i++) {
+		// creates a new li element and an audio element inside of that li
+		let newSong = document.createElement("li");
+		let newSongFile = document.createElement("audio");
+
+		// works with blobs
+		let myURL = URL.createObjectURL(myfiles[i]);
+
+		// Clean up the URL Object after we are done with it
+		newSongFile.addEventListener("load", () => {
+			URL.revokeObjectURL(myURL);
+		});
+
+		// Places name attribute inside audio tags, but doesn't render to page.
+		// Figure out how to display file names in the browser. Maybe wrap names in a tag??
+		newSongFile.innerHTML = playListFiles[i].name;
+
+		//appends elements inside playlist.
+		playList.appendChild(newSong);
+		newSong.appendChild(newSongFile);
+
+		//adds src and control attributes to the audio elements.
+		newSongFile.controls = "true";
+		newSongFile.src = myURL;
 	}
-	playList.innerHTML = "<ul>" + output.join("") + "</ul>";
-	console.log(playListFiles);
 }
-
-//displays files in output section in browser.
-// function fileOutput(e) {
-// 	var files = e.target.files; // FileList object
-
-// 	// files is a FileList of File objects. List some properties.
-// 	var output = [];
-// 	for (var i = 0, f; (f = files[i]); i++) {
-// 		output.push("<li><strong>", f.name, "</strong></li>");
-// 	}
-
-// 	document.getElementById("playlist").innerHTML =
-// 		"<ul>" + output.join("") + "</ul>";
-// 	//file test
-// 	console.log(files[0]);
-// }
-
-// document
-// 	.getElementById("fileInput")
-// 	.addEventListener("change", fileOutput, false);
+console.log(playListFiles);

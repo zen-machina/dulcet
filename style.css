@@ -54,20 +54,28 @@ body {
   margin: auto;
 }
 
-.songlib .songlibbox #playlist {
+.songlib .songlibbox .playlistBox {
   display: inline-block;
-  background-color: #c5c5c5;
+  background-color: #dbc859;
   color: black;
-  width: 25em;
-  height: 15em;
+  width: auto;
+  height: auto;
 }
 
-.songlib .songlibbox .playlist02 {
-  display: inline-block;
-  background-color: #98b0ff;
-  color: black;
+.songlib .songlibbox .playlistBox .playlist {
+  width: auto;
+  height: auto;
+}
+
+.songlib .songlibbox .playlistBox .playlist li {
+  width: auto;
+  height: auto;
+}
+
+.songlib .songlibbox .playlistBox .playlist li audio {
   width: 25em;
-  height: 15em;
+  height: 5em;
+  color: black;
 }
 
 .details {
