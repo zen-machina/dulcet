@@ -72,7 +72,7 @@ body {
   height: auto;
 }
 
-.songlib .songlibbox .playlistBox .playlist li audio {
+.songlib .songlibbox .playlistBox .playlist li a {
   width: 25em;
   height: 5em;
   color: black;

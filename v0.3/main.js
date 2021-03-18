@@ -1,12 +1,11 @@
 // TODO
 /* 
-v0.2
+v0.3
 --> MAIN GOALS: 
 - able to select audio file(s) in folder and load them into playlist.
 - playlist list artist name, song name, and length
 --------------------------------------------------
 --> TODO:
-- Display audio file names.
 - Place audio files in a clean format.
 - Use custom play / pause bottons for each audio file.
 - Add delete functionality for playlist.
@@ -14,41 +13,76 @@ v0.2
 */
 
 let fileInput = document.getElementById("fileInput");
-let myfiles = fileInput.files;
 let playList = document.querySelector(".playlist");
+let audio = document.getElementById("audioElem");
+let audioItem = document.querySelector(".audioItem");
+
+// let myfiles = fileInput.files;
 let playListFiles = [];
 
 //event listeners
 fileInput.addEventListener("change", addFiles);
+audio.addEventListener("click", audioPlayPause);
 
 function addFiles() {
 	// takes files from FileList (input files) and places them into playListFiles[].
-	playListFiles.push.apply(playListFiles, myfiles);
+	let myfiles = fileInput.files;
 
+	// playListFiles.push.apply(playListFiles, myfiles);
 	for (var i = 0; i < myfiles.length; i++) {
-		// creates a new li element and an audio element inside of that li
-		let newSong = document.createElement("li");
-		let newSongFile = document.createElement("audio");
+		// add if statement check to see if files <= 5.
 
+		// creates a new li element and an a element inside of that li
+		let newSong = document.createElement("li");
+		let newSongFile = document.createElement("a");
 		// works with blobs
 		let myURL = URL.createObjectURL(myfiles[i]);
-
 		// Clean up the URL Object after we are done with it
 		newSongFile.addEventListener("load", () => {
 			URL.revokeObjectURL(myURL);
 		});
 
-		// Places name attribute inside audio tags, but doesn't render to page.
-		// Figure out how to display file names in the browser. Maybe wrap names in a tag??
-		newSongFile.innerHTML = playListFiles[i].name;
+		newSongFile.addEventListener("click", audioPlayPause);
+		// adds class of .audioItem to newSongFile.
+		newSongFile.classList.add("audioItem");
+		// adds new objectURL into newSongFile href.
+		newSongFile.href = myURL;
+		// adds playbutton and file name to each newSongFile.
+		newSongFile.innerHTML = `<i class="fa fa-play-circle"></i>${myfiles[i].name}`;
 
 		//appends elements inside playlist.
 		playList.appendChild(newSong);
 		newSong.appendChild(newSongFile);
 
-		//adds src and control attributes to the audio elements.
-		newSongFile.controls = "true";
-		newSongFile.src = myURL;
+		//adds src and control attributes to the audio element.
+		audio.controls = "true";
+		audio.src = myURL;
+	}
+	console.log(myfiles);
+}
+
+function audioPlayPause(e) {
+	e.preventDefault();
+
+	// checks to see if the clicked on song is currently loaded.
+	let isCurrentAudio = this.getAttribute("href") === audio.getAttribute("src");
+	if (isCurrentAudio && audio.paused) {
+		setPauseIcon(this);
+		audio.play();
+	} else if (isCurrentAudio && !audio.paused) {
+		setPlayIcon(this);
+		audio.pause();
 	}
 }
-console.log(playListFiles);
+
+function setPauseIcon(elem) {
+	let icon = elem.querySelector("i");
+	icon.classList.remove("fa-play-circle");
+	icon.classList.add("fa-pause-circle");
+}
+
+function setPlayIcon(elem) {
+	let icon = elem.querySelector("i");
+	icon.classList.remove("fa-pause-circle");
+	icon.classList.add("fa-play-circle");
+}
