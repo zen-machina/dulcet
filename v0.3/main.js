@@ -64,7 +64,7 @@ function addFiles() {
 
 // Works for the most part.
 //Bug: when I load more songs while I have a song playing,
-// then click on new song to play, the pause botton stays on previous song.
+// then click on new song to play, the pause botton stays on previous song.y
 function audioPlayPause(e) {
 	e.preventDefault();
 
