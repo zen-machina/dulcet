@@ -1,179 +1,233 @@
-* {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
+*,
+*:before,
+*:after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-ul li {
-	list-style: none;
+ul li a {
+  list-style: none;
+  text-decoration: none;
+}
+
+html,
+body {
+  height: 100%;
 }
 
 body {
-	background-color: lightgreen;
-
-	/* Smoothly transition the background color */
-	transition: background-color 0.5s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(206, 206, 206);
 }
 
 /* Using flex with the column direction to 
    align items in a vertical direction */
-.player {
-	height: auto;
-	display: flex;
-	align-items: center;
-	flex-direction: column;
-	justify-content: center;
-}
+// .player {
+// 	height: auto;
+// 	display: flex;
+// 	align-items: center;
+// 	flex-direction: column;
+// 	justify-content: center;
+// }
 
 .songlib {
-	min-width: 50%;
-	width: auto;
+  min-width: 795px;
+  width: 60vw;
+  height: 50vh;
+  // margin: 10em 10em;
+  // margin-top: 20%;
 
-	.songlibbox {
-		display: flex;
-		align-items: center;
-		flex-direction: column;
+  #fileInput {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+  }
 
-		margin: auto;
+  .inputLabel {
+    font-size: 1.25em;
+    font-weight: 700;
+    color: white;
+    background-color: black;
+    padding: 10px;
+    margin-bottom: 10px;
+    display: inline-block;
+  }
 
-		.playlistBox {
-			display: inline-block;
-			background-color: rgb(219, 200, 89);
-			color: black;
-			width: auto;
-			height: auto;
+  .songlibbox {
+    display: flex;
+    // align-items: center;
+    // flex-direction: column;
+    background-color: rgb(0, 0, 0);
+    width: 100%;
+    height: 100%;
 
-			.playlist {
-				width: auto;
-				height: auto;
+    .playlistBox {
+      border: 3px solid rgb(255, 166, 0);
+      background-color: rgb(219, 200, 89);
+      color: black;
+      width: 20rem;
+      height: 100%;
+      //   padding: 15px;
 
-				& li {
-					width: auto;
-					height: auto;
-				}
-				& li a {
-					width: 25em;
-					height: 5em;
-					color: black;
-				}
-			}
-		}
-	}
+      .playlist {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        // margin: 5px;
+
+        li {
+          //   padding: 20px;
+          //   margin: 0.9rem 0;
+          width: 100%;
+          height: 100%;
+          display: flex;
+          text-align: center;
+          background-color: rgb(255, 166, 0);
+
+          a {
+            font-size: 1.4em;
+            color: black;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            width: 100%;
+
+            &:hover {
+              background-color: aqua;
+            }
+            // margin-right: 1.5em;
+
+            i {
+              margin: 0 1.2em 5px;
+            }
+          }
+        }
+      }
+    }
+  }
 }
 
 .details {
-	display: flex;
-	align-items: center;
-	flex-direction: column;
-	justify-content: center;
-	margin-top: 5em;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 5em;
 }
 
 .track-art {
-	margin: 0.5em;
-	height: 10em;
-	width: 10em;
-	background-image: URL("https://source.unsplash.com/Qrspubmx6kE/640x360");
-	background-size: cover;
-	background-position: center;
-	border-radius: 15%;
+  margin: 0.5em;
+  height: 10em;
+  width: 10em;
+  background-image: URL("https://source.unsplash.com/Qrspubmx6kE/640x360");
+  background-size: cover;
+  background-position: center;
+  border-radius: 15%;
 }
 
 /* Changing the font sizes to suitable ones */
 .now-playing {
-	font-size: 1rem;
+  font-size: 1rem;
 }
 
 .track-name {
-	font-size: 3rem;
+  font-size: 3rem;
 }
 
 .track-artist {
-	font-size: 1.5rem;
+  font-size: 1.5rem;
 }
 
 /* Using flex with the row direction to 
    align items in a horizontal direction */
 .buttons {
-	display: flex;
-	flex-direction: row;
-	align-items: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 .playpause-track,
 .prev-track,
 .next-track {
-	padding: 1em;
-	opacity: 0.8;
+  padding: 1em;
+  opacity: 0.8;
 
-	/* Smoothly transition the opacity */
-	transition: opacity 0.2s;
+  /* Smoothly transition the opacity */
+  transition: opacity 0.2s;
 }
 
 /* Change the opacity when mouse is hovered */
 .playpause-track:hover,
 .prev-track:hover,
 .next-track:hover {
-	opacity: 1;
+  opacity: 1;
 }
 
 /* Define the slider width so that it scales properly */
 .slider_container {
-	width: 75%;
-	max-width: 30em;
-	display: flex;
-	justify-content: center;
-	align-items: center;
+  width: 75%;
+  max-width: 30em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* Modify the appearance of the slider */
 .seek_slider,
 .volume_slider {
-	-webkit-appearance: none;
-	-moz-appearance: none;
-	appearance: none;
-	height: 5px;
-	background: black;
-	opacity: 0.7;
-	-webkit-transition: 0.2s;
-	transition: opacity 0.2s;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  height: 5px;
+  background: black;
+  opacity: 0.7;
+  -webkit-transition: 0.2s;
+  transition: opacity 0.2s;
 }
 
 /* Modify the appearance of the slider thumb */
 .seek_slider::-webkit-slider-thumb,
 .volume_slider::-webkit-slider-thumb {
-	-webkit-appearance: none;
-	-moz-appearance: none;
-	appearance: none;
-	width: 15px;
-	height: 15px;
-	background: white;
-	cursor: pointer;
-	border-radius: 50%;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 15px;
+  height: 15px;
+  background: white;
+  cursor: pointer;
+  border-radius: 50%;
 }
 
 /* Change the opacity when mouse is hovered */
 .seek_slider:hover,
 .volume_slider:hover {
-	opacity: 1;
+  opacity: 1;
 }
 
 .seek_slider {
-	width: 60%;
+  width: 60%;
 }
 
 .volume_slider {
-	width: 30%;
+  width: 30%;
 }
 
 .current-time,
 .total-duration {
-	padding: 0.5em;
+  padding: 0.5em;
 }
 
 i.fa-volume-down,
 i.fa-volume-up {
-	padding: 0.5em;
+  padding: 0.5em;
 }
 
 /* Change the mouse cursor to a pointer 
@@ -182,5 +236,5 @@ i.fa-play-circle,
 i.fa-pause-circle,
 i.fa-step-forward,
 i.fa-step-backward {
-	cursor: pointer;
+  cursor: pointer;
 }
