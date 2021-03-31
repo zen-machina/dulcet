@@ -14,6 +14,7 @@ v0.4
 
 let fileInput = document.getElementById("fileInput");
 let playList = document.querySelector(".playlist");
+let playListItems = playList.children;
 let audio = document.getElementById("audioElem");
 let audioItem = document.querySelector(".audioItem");
 let currentAudio = null;
@@ -53,6 +54,7 @@ function addFiles() {
     // Adds src attribute to the audio element.
     audio.src = myURL;
   }
+  console.log(playListItems);
 }
 
 // Bug: when I load more songs while I have a song playing,

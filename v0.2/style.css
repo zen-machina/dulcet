@@ -1,8 +1,7 @@
 * {
   margin: 0;
   padding: 0;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 ul li {
@@ -12,7 +11,6 @@ ul li {
 body {
   background-color: lightgreen;
   /* Smoothly transition the background color */
-  -webkit-transition: background-color 0.5s;
   transition: background-color 0.5s;
 }
 
@@ -20,40 +18,22 @@ body {
    align items in a vertical direction */
 .player {
   height: auto;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .songlib {
   min-width: 50%;
   width: auto;
 }
-
 .songlib .songlibbox {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  align-items: center;
+  flex-direction: column;
   margin: auto;
 }
-
 .songlib .songlibbox .playlistBox {
   display: inline-block;
   background-color: #dbc859;
@@ -61,17 +41,14 @@ body {
   width: auto;
   height: auto;
 }
-
 .songlib .songlibbox .playlistBox .playlist {
   width: auto;
   height: auto;
 }
-
 .songlib .songlibbox .playlistBox .playlist li {
   width: auto;
   height: auto;
 }
-
 .songlib .songlibbox .playlistBox .playlist li audio {
   width: 25em;
   height: 5em;
@@ -79,19 +56,10 @@ body {
 }
 
 .details {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
   margin-top: 5em;
 }
 
@@ -121,16 +89,9 @@ body {
 /* Using flex with the row direction to 
    align items in a horizontal direction */
 .buttons {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  flex-direction: row;
+  align-items: center;
 }
 
 .playpause-track,
@@ -139,7 +100,6 @@ body {
   padding: 1em;
   opacity: 0.8;
   /* Smoothly transition the opacity */
-  -webkit-transition: opacity 0.2s;
   transition: opacity 0.2s;
 }
 
@@ -154,15 +114,9 @@ body {
 .slider_container {
   width: 75%;
   max-width: 30em;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  justify-content: center;
+  align-items: center;
 }
 
 /* Modify the appearance of the slider */
@@ -174,8 +128,6 @@ body {
   height: 5px;
   background: black;
   opacity: 0.7;
-  -webkit-transition: 0.2s;
-  -webkit-transition: opacity 0.2s;
   transition: opacity 0.2s;
 }
 
@@ -223,5 +175,4 @@ i.fa-pause-circle,
 i.fa-step-forward,
 i.fa-step-backward {
   cursor: pointer;
-}
-/*# sourceMappingURL=style.css.map */
+}/*# sourceMappingURL=style.css.map */
