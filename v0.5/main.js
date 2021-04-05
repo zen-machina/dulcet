@@ -19,45 +19,48 @@ let itemIcons = playListItems.children;
 let audio = document.getElementById("audioElem");
 let currentAudio = null;
 
-// Event listeners ( outside of loop )
+// Event listeners
 fileInput.addEventListener("change", addFiles);
 audio.addEventListener("click", audioPlayPause);
 
 function addFiles() {
   let myfiles = fileInput.files;
+  let pauseIcons = playList.querySelectorAll(".fa-pause");
 
-  // Add if statement check to see if files > 5
+  if (pauseIcons.length > 0) {
+    setPlayIcon(pauseIcons[0].parentElement);
+    audio.pause();
+  }
+
   if (playListItems.length > 4) {
     console.log("There is a limit of 5 audio files.");
   } else {
     for (var i = 0; i < myfiles.length; i++) {
-      // Creates a new li element and an a element inside of that li
-      let audioItem = document.createElement("a");
-      // Creates blobs of each file
-      let myURL = URL.createObjectURL(myfiles[i]);
+      if (playListItems.length > 4) {
+        console.log("There is a limit of 5 audio files.");
+      } else {
+        // Creates a new li element and an a element inside of that li
+        let audioItem = document.createElement("a");
+        // Creates blobs of each file
+        let myURL = URL.createObjectURL(myfiles[i]);
+        // Clean up the URL Object after we are done with it
+        audioItem.addEventListener("load", () => {
+          URL.revokeObjectURL(myURL);
+        });
+        // Adds eventlistener on each a tag
+        audioItem.addEventListener("click", audioPlayPause);
 
-      // Clean up the URL Object after we are done with it
-      audioItem.addEventListener("load", () => {
-        URL.revokeObjectURL(myURL);
-      });
-      // Adds eventlistener on each a tag
-      audioItem.addEventListener("click", audioPlayPause);
-
-      // Adds class of .audioItem to  audioItem. Do I need this ?
-      audioItem.classList.add("audioItem");
-      // Adds new objectURL into  audioItem href
-      audioItem.href = myURL;
-      // Adds playbutton and file name to each  audioItem
-      audioItem.innerHTML = `<i class="fa fa-play"></i>${myfiles[i].name}`;
-      // Appends elements inside playlist.
-      playList.appendChild(audioItem);
-      // Adds src attribute to the audio element.
-      audio.src = myURL;
-
-      if (playListItems[i].childNodes[0].classList.contains("fa-pause")) {
-        setPlayIcon(audioItem);
+        // Adds class of .audioItem to  audioItem. Do I need this ?
+        audioItem.classList.add("audioItem");
+        // Adds new objectURL into  audioItem href
+        audioItem.href = myURL;
+        // Adds playbutton and file name to each  audioItem
+        audioItem.innerHTML = `<i class="fa fa-play"></i>${myfiles[i].name}`;
+        // Appends elements inside playlist.
+        playList.appendChild(audioItem);
+        // Adds src attribute to the audio element
+        audio.src = myURL;
       }
-      console.log(playListItems[i].childNodes[0]);
     }
   }
 }
@@ -71,22 +74,18 @@ function audioPlayPause(e) {
   let audioLoaded = this.getAttribute("href") === audio.getAttribute("src");
 
   if (audioLoaded && audio.paused) {
-    console.log("if#1");
     currentAudio = this;
     setPauseIcon(currentAudio);
     audio.play();
   } else if (audioLoaded && !audio.paused) {
-    console.log("elseif#2");
     currentAudio = this;
     setPlayIcon(currentAudio);
     audio.pause();
   } else {
     if (currentAudio) {
-      console.log("else--if#4");
       setPlayIcon(currentAudio);
     }
-    console.log("else#3");
-    console.log(currentAudio);
+
     currentAudio = this;
     setPauseIcon(currentAudio);
     audio.src = currentAudio.href;
