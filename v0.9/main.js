@@ -8,13 +8,15 @@ v0.9
 - display "limit of 5 files" when user tries to upload too many files
 */
 
-// Variables
+// Global Variables
 let fileInput = document.getElementById("fileInput");
 let playList = document.querySelector(".playlist");
 let playListItems = playList.children;
 let itemIcons = playListItems.children;
 let audio = document.getElementById("audioElem");
 let currentAudio = null;
+let canvas = document.querySelector(".visualizer");
+let ctx = canvas.getContext("2d");
 
 // Event listeners
 fileInput.addEventListener("change", addFiles);
@@ -50,6 +52,7 @@ function addFiles() {
 
       // Sets up audioItems ( audio files )
       audioItem.addEventListener("click", audioPlayPause);
+      audioItem.addEventListener("click", createVisualizer);
       audioItem.href = myURL;
       audioItem.innerHTML = `<i class="fa fa-play"></i>${myfiles[i].name}`;
       playList.appendChild(audioItem);
@@ -96,4 +99,22 @@ function setPlayIcon(elem) {
   let icon = elem.querySelector("i");
   icon.classList.remove("fa-pause");
   icon.classList.add("fa-play");
+}
+
+function createVisualizer() {
+  // Create new AudioContext node
+  let audioCtx = new AudioContext();
+  // Create Analyser node
+  let analyser = audioCtx.createAnalyser();
+  // Convert audio element into a node
+  let source = audioCtx.createMediaElementSource(audio);
+  // Connects our audio to an analyser then back to the default output
+  source.connect(analyser);
+  source.connect(audioCtx.destination);
+
+  // Print the analyzed frequencies
+  const frequencyData = new Uint8Array(analyser.frequencyBinCount);
+  analyser.getByteFrequencyData(frequencyData);
+
+  console.log(frequencyData);
 }
