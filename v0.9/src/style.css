@@ -49,7 +49,6 @@ body {
 }
 .songlib .songlibbox {
   display: flex;
-  background-color: black;
   width: 100%;
   height: 100%;
 }
@@ -88,6 +87,9 @@ body {
   display: flex;
   text-align: center;
   background-color: #ffa600;
+}
+.songlib .songlibbox canvas {
+  background-color: black;
 }
 
 .details {
