@@ -1,33 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
-    />
-    <link rel="shortcut icon" href="#" />
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
+        />
+        <link rel="shortcut icon" href="#" />
 
-    <!-- Load the custom CSS style file -->
-    <link rel="stylesheet" type="text/css" href="style.css" />
-    <title>Dulcet</title>
-    <!-- Load FontAwesome icons -->
-  </head>
-  <body>
-    <!-- Define the section for displaying the playlist section-->
-    <div class="songlib">
-      <input type="file" id="fileInput" multiple />
-      <label for="fileInput" class="inputLabel">+ files</label>
-      <div class="songlibbox">
-        <div class="playlistBox">
-          <audio id="audioElem"></audio>
-          <ul class="playlist"></ul>
+        <!-- Load the custom CSS style file -->
+        <link rel="stylesheet" type="text/css" href="src/style.css" />
+        <title>Dulcet</title>
+        <!-- Load FontAwesome icons -->
+    </head>
+    <body>
+        <!-- Define the section for displaying the playlist section-->
+        <div class="songlib">
+            <input type="file" id="fileInput" multiple />
+            <label for="fileInput" class="inputLabel">+ files</label>
+            <div class="songlibbox">
+                <div class="playlistBox">
+                    <audio id="audioElem"></audio>
+                    <ul class="playlist"></ul>
+                </div>
+                <canvas class="visualizer" width="500" height="500"></canvas>
+            </div>
         </div>
-        <canvas class="visualizer" width="500" height="500"></canvas>
-      </div>
-    </div>
-    <!-- Load the main script for the player -->
-    <script src="main.js"></script>
-  </body>
+        <!-- Load the main script for the player -->
+        <script src="src/main.js"></script>
+    </body>
 </html>

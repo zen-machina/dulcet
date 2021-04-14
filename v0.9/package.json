@@ -1,0 +1,24 @@
+{
+  "name": "dulcet",
+  "version": "1.0.0",
+  "description": "audio player",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "tst"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/astralpunk/dulcet.git"
+  },
+  "author": "Armnando Alvarez",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/astralpunk/dulcet/issues"
+  },
+  "homepage": "https://github.com/astralpunk/dulcet#readme",
+  "devDependencies": {
+    "browser-sync": "^2.26.14",
+    "gulp": "^4.0.2",
+    "gulp-sass": "^4.1.0"
+  }
+}
