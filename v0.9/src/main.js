@@ -4,7 +4,7 @@ v0.9
 --> MAIN GOALS: 
 - create audio visualizer: X
 - create function for when audio is done playing
-- fine tune how audio file names are displayed
+- fine tune how audio file names are displayed X
 - make app look better
 - display "limit of 5 files" when user tries to upload too many files
 ---> NOTES:
@@ -29,6 +29,8 @@ audio.addEventListener("click", audioPlayPause);
 function addFiles() {
     let myfiles = fileInput.files;
     let pauseIcons = playList.querySelectorAll(".fa-pause");
+    // Adds function for when audio is finished playing
+    audio.addEventListener("ended", playNext);
 
     // Checks if there is a file playing when uploading more files
     if (pauseIcons.length > 0) {
@@ -38,7 +40,6 @@ function addFiles() {
 
     // Checks if there are already 5 audio files
     if (playListItems.length > 4 || myfiles.length > 4) {
-        console.log("There is a limit of 5 files...");
     }
 
     // Adds audio files
@@ -57,7 +58,11 @@ function addFiles() {
             // Sets up audioItems ( audio files )
             audioItem.addEventListener("click", audioPlayPause);
             audioItem.href = myURL;
-            audioItem.innerHTML = `<i class="fa fa-play"></i>${myfiles[i].name}`;
+            audioItem.classList.add("notPlaying");
+            //vim-prettier auto formatting this part weird
+            audioItem.innerHTML = `<i class="fa fa-play"></i>${myfiles[
+                i
+            ].name.replace(/\.[^/.]+$/, "")}`;
             playList.appendChild(audioItem);
             audio.src = myURL;
         }
@@ -68,24 +73,26 @@ function addFiles() {
 function audioPlayPause(e) {
     e.preventDefault();
 
-    // if (!audioCtx) {
-    //   createVisualizer();
-    //   console.log(audioCtx);
-    // }
+    // Create Visualizer
+    if (!audioCtx) {
+        createVisualizer();
+    }
 
     // Checks to see if the clicked on song is currently loaded
     let audioLoaded = this.getAttribute("href") === audio.getAttribute("src");
 
-    // Maybe you need to place vizualizer function here???
     if (audioLoaded && audio.paused) {
         currentAudio = this;
         setPauseIcon(currentAudio);
         audio.play();
-        createVisualizer();
+        this.classList.remove("notPlaying");
+        this.classList.add("playing");
     } else if (audioLoaded && !audio.paused) {
         currentAudio = this;
         setPlayIcon(currentAudio);
         audio.pause();
+        this.classList.remove("playing");
+        this.classList.add("notPlaying");
     } else {
         if (currentAudio) {
             setPlayIcon(currentAudio);
@@ -94,7 +101,8 @@ function audioPlayPause(e) {
         setPauseIcon(currentAudio);
         audio.src = currentAudio.href;
         audio.play();
-        createVisualizer();
+        this.classList.remove("notPlaying");
+        this.classList.add("playing");
     }
 }
 
@@ -110,6 +118,28 @@ function setPlayIcon(elem) {
     let icon = elem.querySelector("i");
     icon.classList.remove("fa-pause");
     icon.classList.add("fa-play");
+}
+
+// Need to wite a function that plays next song once current one is finished playing
+function playNext() {
+    let currentAudio = playList.querySelector(".playing");
+    let nextAudio = currentAudio.nextSibling;
+
+    if (currentAudio && nextAudio) {
+        setPlayIcon(currentAudio);
+        setPauseIcon(nextAudio);
+        audio.src = nextAudio.href;
+        audio.play();
+        // make class switching it's own function
+        currentAudio.classList.remove(".playing");
+        currentAudio.classList.add(".notPlaying");
+        nextAudio.classList.remove(".notPlaying");
+        nextAudio.classList.add(".playing");
+    }
+
+    setPlayIcon(currentAudio);
+    currentAudio.classList.remove(".playing");
+    currentAudio.classList.add(".notPlaying");
 }
 
 function createVisualizer() {
@@ -140,12 +170,11 @@ function createVisualizer() {
         for (let i = 0; i < bufferLength; i++) {
             const barHeight = frequencyData[i] - 75;
             const r = barHeight + 25 * (i / bufferLength);
-            ctx.fillStyle = `rgb(${r}, 100, 50)`;
+            ctx.fillStyle = `rgb(${r},0, 0)`;
             ctx.fillRect(bar, canvas.height - barHeight, barWidth, barHeight);
             bar += barWidth + 2;
         }
     }
 
     renderFrame();
-    console.log(frequencyData);
 }
