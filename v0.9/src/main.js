@@ -26,6 +26,7 @@ let audioCtx = null;
 fileInput.addEventListener("change", addFiles);
 audio.addEventListener("click", audioPlayPause);
 
+// Funtions
 function addFiles() {
     let myfiles = fileInput.files;
     let pauseIcons = playList.querySelectorAll(".fa-pause");
@@ -85,14 +86,12 @@ function audioPlayPause(e) {
         currentAudio = this;
         setPauseIcon(currentAudio);
         audio.play();
-        this.classList.remove("notPlaying");
-        this.classList.add("playing");
+        togglePlayClass(currentAudio);
     } else if (audioLoaded && !audio.paused) {
         currentAudio = this;
         setPlayIcon(currentAudio);
         audio.pause();
-        this.classList.remove("playing");
-        this.classList.add("notPlaying");
+        togglePlayClass(currentAudio);
     } else {
         if (currentAudio) {
             setPlayIcon(currentAudio);
@@ -101,8 +100,7 @@ function audioPlayPause(e) {
         setPauseIcon(currentAudio);
         audio.src = currentAudio.href;
         audio.play();
-        this.classList.remove("notPlaying");
-        this.classList.add("playing");
+        togglePlayClass(currentAudio);
     }
 }
 
@@ -120,26 +118,35 @@ function setPlayIcon(elem) {
     icon.classList.add("fa-play");
 }
 
+function togglePlayClass(elem) {
+    if (elem.classList.contains("playing")) {
+        elem.classList.remove("playing");
+        elem.classList.add("notPlaying");
+    } else if (elem.classList.contains("notPlaying")) {
+        elem.classList.remove("notPlaying");
+        elem.classList.add("playing");
+    }
+}
+
 // Need to wite a function that plays next song once current one is finished playing
 function playNext() {
     let currentAudio = playList.querySelector(".playing");
     let nextAudio = currentAudio.nextSibling;
 
+    console.log(currentAudio.innerHTML);
     if (currentAudio && nextAudio) {
         setPlayIcon(currentAudio);
         setPauseIcon(nextAudio);
         audio.src = nextAudio.href;
         audio.play();
+        console.log(currentAudio.innerHTML);
         // make class switching it's own function
-        currentAudio.classList.remove(".playing");
-        currentAudio.classList.add(".notPlaying");
-        nextAudio.classList.remove(".notPlaying");
-        nextAudio.classList.add(".playing");
+        togglePlayClass(currentAudio);
+        console.log(nextAudio.innerHTML);
+        togglePlayClass(nextAudio);
+    } else {
+        togglePlayClass(currentAudio);
     }
-
-    setPlayIcon(currentAudio);
-    currentAudio.classList.remove(".playing");
-    currentAudio.classList.add(".notPlaying");
 }
 
 function createVisualizer() {
