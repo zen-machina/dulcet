@@ -7,28 +7,33 @@
             rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
         />
-        <link rel="shortcut icon" href="#" />
-
         <!-- Load the custom CSS style file -->
         <link rel="stylesheet" type="text/css" href="src/style.css" />
         <link
-            href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap"
+            href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono:wght@400;700&display=swap"
             rel="stylesheet"
         />
-        <title>Dulcet</title>
+        <title>dulcet</title>
         <!-- Load FontAwesome icons -->
     </head>
     <body>
         <!-- Define the section for displaying the playlist section-->
         <div class="songlib">
             <input type="file" id="fileInput" multiple />
-            <label for="fileInput" class="inputLabel">+ files</label>
+            <div class="navbox">
+                <label for="fileInput" class="inputLabel">+ add audio</label>
+                <span class="error hidden">Limit of 5 audio files ...</span>
+                <span class="dulcet-logo">dulcet</span>
+            </div>
             <div class="songlibbox">
                 <div class="playlistBox">
                     <audio id="audioElem"></audio>
                     <ul class="playlist"></ul>
                 </div>
-                <canvas class="visualizer" width="500" height="500"></canvas>
+                <div class="canv">
+                    <canvas class="visualizer" width="526.667" height="450">
+                    </canvas>
+                </div>
             </div>
         </div>
         <!-- Load the main script for the player -->

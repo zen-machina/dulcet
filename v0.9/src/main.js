@@ -2,11 +2,14 @@
 /* 
 v0.9
 --> MAIN GOALS: 
+- only accept audio files.
 - create audio visualizer: X
-- create function for when audio is done playing
+- create function for when audio is done playing X
 - fine tune how audio file names are displayed X
-- make app look better
-- display "limit of 5 files" when user tries to upload too many files
+- make app look better X
+    - play around with different visualizers X
+    - better colors X
+- display "limit of 5 files" when user tries to upload too many files X
 ---> NOTES:
 - Bug: Sound distortion using Firefox with repeated pausing and playing of audio
 */
@@ -18,8 +21,6 @@ let playListItems = playList.children;
 let itemIcons = playListItems.children;
 let audio = document.getElementById("audioElem");
 let currentAudio = null;
-let canvas = document.querySelector(".visualizer");
-let ctx = canvas.getContext("2d");
 let audioCtx = null;
 
 // Event listeners
@@ -39,13 +40,15 @@ function addFiles() {
         audio.pause();
     }
 
-    // Checks if there are already 5 audio files
-    if (playListItems.length > 4 || myfiles.length > 4) {
-    }
-
     // Adds audio files
     for (var i = 0; i < myfiles.length; i++) {
         if (playListItems.length > 4) {
+            // display error message
+            let errMsg = document.querySelector(".error");
+            errMsg.classList.toggle("hidden");
+            setTimeout(function () {
+                errMsg.classList.toggle("hidden");
+            }, 5000);
             break;
         } else {
             let audioItem = document.createElement("a");
@@ -128,7 +131,6 @@ function togglePlayClass(elem) {
     }
 }
 
-// Need to wite a function that plays next song once current one is finished playing
 function playNext() {
     let currentAudio = playList.querySelector(".playing");
     let nextAudio = currentAudio.nextSibling;
@@ -140,7 +142,6 @@ function playNext() {
         audio.src = nextAudio.href;
         audio.play();
         console.log(currentAudio.innerHTML);
-        // make class switching it's own function
         togglePlayClass(currentAudio);
         console.log(nextAudio.innerHTML);
         togglePlayClass(nextAudio);
@@ -150,6 +151,10 @@ function playNext() {
 }
 
 function createVisualizer() {
+    let canvas = document.querySelector(".visualizer");
+    let WIDTH = canvas.width;
+    let HEIGHT = canvas.height;
+    let ctx = canvas.getContext("2d");
     // Create new AudioContext node
     let audioCtx = new AudioContext();
     // Convert audio element into a node
@@ -159,29 +164,30 @@ function createVisualizer() {
     // Connects our audio to an analyser then back to the default output
     source.connect(analyser);
     source.connect(audioCtx.destination);
-    analyser.fftSize = 2048;
+    analyser.fftSize = 256;
 
     // Print the analyzed frequencies
     let bufferLength = analyser.frequencyBinCount;
     const frequencyData = new Uint8Array(bufferLength);
-    const barWidth = (canvas.width / bufferLength) * 2.5;
+    const barWidth = (WIDTH / bufferLength) * 2.5;
 
     function renderFrame() {
         requestAnimationFrame(renderFrame);
 
-        let bar = 0;
+        let x = 0;
         analyser.getByteFrequencyData(frequencyData);
-        ctx.fillStyle = "#000";
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = "#121212";
+        ctx.fillRect(0, 0, WIDTH, HEIGHT);
 
         for (let i = 0; i < bufferLength; i++) {
-            const barHeight = frequencyData[i] - 75;
+            const barHeight = frequencyData[i];
             const r = barHeight + 25 * (i / bufferLength);
-            ctx.fillStyle = `rgb(${r},0, 0)`;
-            ctx.fillRect(bar, canvas.height - barHeight, barWidth, barHeight);
-            bar += barWidth + 2;
+            const g = 50 * (i / bufferLength);
+            const b = 20;
+            ctx.fillStyle = "rgb(" + r + "," + g + "," + b + ")";
+            ctx.fillRect(x, HEIGHT - barHeight, barWidth, barHeight);
+            x += barWidth + 1;
         }
     }
-
     renderFrame();
 }
