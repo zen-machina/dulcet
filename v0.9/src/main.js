@@ -41,9 +41,10 @@ function addFiles() {
     }
 
     // Adds audio files
+    // Change this to a forEach
     for (var i = 0; i < myfiles.length; i++) {
+        // display error message if more than 5 files
         if (playListItems.length > 4) {
-            // display error message
             let errMsg = document.querySelector(".error");
             errMsg.classList.toggle("hidden");
             setTimeout(function () {
